@@ -33,13 +33,32 @@ public class Ejercicios {
     public static void restitulo() {
         switch (in.next()){
             case "1":
-                ejercicio1();
+                int num = pedint();
+                System.out.println(ej1Met(num, 0));
                 break;
             case "2":
-                ejercicio2();
+                int num2 = pedint();
+                int elevar = pedint();
+                System.out.println(ej2Met(num2, elevar));
                 break;
             case "3":
                 ejercicio3();
+                break;
+            case "4":
+                int binario = pedint();
+                ej4Met(binario);
+                break;
+            case "5":
+                int num5 = pedint();
+                System.out.println(ej5Met(num5));
+                break;
+            case "6":
+                String alfa = pedirStr();
+                palabra6 = alfa.toCharArray();
+                ej6Met(palabra6.length);
+                break;
+            case "7":
+                System.out.println(ej7Met(pedint()));
                 break;
             case "x", "X":
                 System.exit(0);
@@ -63,24 +82,24 @@ public class Ejercicios {
 
     }
 
-    public static int pedir() {
+    public static int pedint() {
 
         System.out.println();
         System.out.println("Introduce el número a calcular:");
         int num = in.nextInt();
         if (num < 0) {
             System.out.println("Debe ser un número positivo.");
-            pedir();
+            pedint();
         }
         return num;
     }
-
-    public static void ejercicio1() {
-
-        int num = pedir();
-        System.out.println(ej1Met(num, 0));
+    public static String pedirStr() {
+        System.out.println();
+        System.out.println("Introduce una cadena:");
+        return in.next();
 
     }
+
     public static int ej1Met(int num, int cont) {
 
         if (num != 0) {
@@ -91,16 +110,6 @@ public class Ejercicios {
 
     }
 
-    public static void ejercicio2() {
-
-        int num = pedir();
-        int elevar = pedir();
-
-        System.out.println(ej2Met(num, elevar));
-
-
-
-    }
     public static int ej2Met(int num, int elevar) {
 
         if (elevar != 1) {
@@ -113,6 +122,7 @@ public class Ejercicios {
 
     }
 
+    static char palabra3[];
     public static void ejercicio3() {
 
         System.out.println("Introduzca '1' para modo cadena");
@@ -120,21 +130,25 @@ public class Ejercicios {
 
         switch (in.next()) {
             case "1":
-                cadenaEj3();
+                String entrada = pedirStr();
+                palabra3 = entrada.toCharArray();
+                cadenaEj3(palabra3.length -1);
                 break;
             case "2":
-                int num = pedir();
+                int num = pedint();
                 numEj3(num);
                 break;
             default:
                 ejercicio3();
         }
 
-
-
     }
-    public static void cadenaEj3() {
+    public static void cadenaEj3(int len) {
 
+        if (len != 0) {
+            System.out.print(palabra3[len]);
+            cadenaEj3(len-1);
+        }
 
 
     }
@@ -144,6 +158,53 @@ public class Ejercicios {
             System.out.print(rest);
             numEj3(num / 10);
         }
+    }
+
+    public static void ej4Met(int num) {
+
+        int rest = num % 10;
+        if (rest == 0 || rest == 1) {
+            if (num == 0 || num == 1) {
+                System.out.println("Es un número binario.");
+            } else {
+                ej4Met(num/10);
+            }
+        } else {
+            System.out.println("No es un número binario.");
+        }
+    }
+    
+    public static int ej5Met(int num) {
+
+        if (num != 1) {
+            System.out.print(ej5Met(num/2)%2);
+        }
+        return num%2;
+
 
     }
+
+    static char palabra6[];
+    public static void ej6Met(int len) {
+
+        if (len != 0) {
+            if (len == 2 && palabra6[len-1] >= palabra6[len-2]) {
+                System.out.println("Está ordenado alfabéticamente.");
+            } else if(palabra6[len-1] >= palabra6[len-2]) {
+                ej6Met(len - 1);
+            } else {
+                System.out.println("No está ordenado alfabéticamente.");
+            }
+        }
+    }
+
+    public static int ej7Met(int num) {
+
+        if (num != 0) {
+            num = num + ej7Met(num-1);
+        }
+        return num;
+    }
+    //DXC: Calle de las artes gráficas: 7
+    //A las 14:45 por el parquecito
 }
