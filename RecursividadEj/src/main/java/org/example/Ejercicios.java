@@ -1,11 +1,15 @@
 package org.example;
 
+import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Ejercicios {
 
     static Scanner in = new Scanner(System.in);
     public static void titulo() {
+
+
 
         System.out.println("*** SELECCIONA ENTRE LAS SIGUIENTES OPCIONES DE EJERCICIOS ***");
         System.out.println();
@@ -27,6 +31,11 @@ public class Ejercicios {
         respostej();
 
 
+
+    }
+
+    public static void borrar() throws IOException, InterruptedException {
+        Process proceso = Runtime.getRuntime().exec("ls");
 
     }
 
@@ -86,11 +95,22 @@ public class Ejercicios {
 
         System.out.println();
         System.out.println("Introduce el número a calcular:");
-        int num = in.nextInt();
-        if (num < 0) {
-            System.out.println("Debe ser un número positivo.");
-            pedint();
+        int num = 0;
+        while (true) {
+            try{
+                num = in.nextInt();
+            } catch (InputMismatchException er) {
+                System.out.println("Error, has introducido un valor no numérico.");
+                in.nextLine();
+                continue;
+            }
+            if (num < 0) {
+                System.out.println("Debe ser un número positivo.");
+            } else {
+                break;
+            }
         }
+
         return num;
     }
     public static String pedirStr() {
@@ -173,7 +193,7 @@ public class Ejercicios {
             System.out.println("No es un número binario.");
         }
     }
-    
+
     public static int ej5Met(int num) {
 
         if (num != 1) {
